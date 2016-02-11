@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-FILE* openFile();
+FILE* openFile(char* path, char* mode);
 void closeFile(FILE* f);
 #endif

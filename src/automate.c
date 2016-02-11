@@ -1,8 +1,10 @@
-#include "../include/automate.h"
 #include <stdio.h>
 
-void run(FILE* f){
+#include "../include/automate.h"
+#include "../include/stack.h"
 
+void run(FILE* f){
+  Stack stack;
   State current;  // current state
   char c;         // current analysed caracter
 

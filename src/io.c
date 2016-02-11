@@ -3,7 +3,7 @@
 FILE* openFile(char* path, char* mode){
   FILE *f = fopen(path, mode);
   if (f == NULL){
-      printf("Error opening file!\n");
+      printf("Failed to open file %s\n", path);
       return NULL;
   }
   return f;
