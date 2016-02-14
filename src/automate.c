@@ -58,8 +58,50 @@ void run(FILE* f){
                               current = S5;
                           }
                     break;
+                    case S5:
+                    break;
                     case S6:
-                          // A completer
+                          if(isLetter(c) || isNumber(c)){
+                              current = S7;
+                          }
+                    break;
+                    case S7:
+                          if(c=='='){
+                              current = S8;
+                          }
+                    break;
+                    case S8:
+                          if(c=='\"'){
+                              current = S10;
+                          }
+                          else if(c=='\''){
+                              current = S11;
+                          }
+                    break;
+                    case S9:
+                          if(c=='='){
+                              current = S8;
+                          }
+                    break;
+                    case S10:
+                          if(c=='='){
+                              current = S8;
+                          }
+                    break;
+                    case S11:
+                          if(c=='='){
+                              current = S8;
+                          }
+                    break;
+                    case S12:
+                          if(c=='='){
+                              current = S8;
+                          }
+                    break;
+                    case S13:
+                          if(c=='='){
+                              current = S8;
+                          }
                     break;
             }
       }
