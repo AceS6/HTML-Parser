@@ -1,2 +1,4 @@
-# HTML-Parser
-HTML parser writen in C
+# SGML-Parser
+Check syntax for SGML files (HTML, XML ...)
+
+Written in C
