@@ -11,3 +11,15 @@ FILE* openFile(char* path, char* mode){
 void closeFile(FILE* f){
     fclose(f);
 }
+bool isLetter(char c){
+    if((c > 'a' && c < 'z') || (c > 'A' && c < 'Z')){
+        return true;
+    }
+    return false;
+}
+bool isNumber(char c){
+    if(c > '0' && c < '9'){
+        return true;
+    }
+    return false;
+}
