@@ -59,6 +59,7 @@ void run(FILE* f){
                           }
                     break;
                     case S5:
+                          // a compléter
                     break;
                     case S6:
                           if(isLetter(c) || isNumber(c)){
@@ -77,6 +78,9 @@ void run(FILE* f){
                           else if(c=='\''){
                               current = S11;
                           }
+                          else if(isLetter(c) || isNumber(c)){
+                              current = S9;
+                          }
                     break;
                     case S9:
                           if(c=='='){
@@ -84,24 +88,20 @@ void run(FILE* f){
                           }
                     break;
                     case S10:
-                          if(c=='='){
-                              current = S8;
+                          if(c=='\"'){
+                              current = S12;
                           }
                     break;
                     case S11:
-                          if(c=='='){
-                              current = S8;
+                          if(c=='\''){
+                              current = S12;
                           }
                     break;
                     case S12:
-                          if(c=='='){
-                              current = S8;
-                          }
+                          // a compléter
                     break;
                     case S13:
-                          if(c=='='){
-                              current = S8;
-                          }
+                          // a compléter
                     break;
             }
       }
