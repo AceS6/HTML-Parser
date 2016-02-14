@@ -83,8 +83,8 @@ void run(FILE* f){
                           }
                     break;
                     case S9:
-                          if(c=='='){
-                              current = S8;
+                          if(c==' '){
+                              current = S13;
                           }
                     break;
                     case S10:
@@ -98,10 +98,20 @@ void run(FILE* f){
                           }
                     break;
                     case S12:
-                          // a compléter
+                          if(c==' '){
+                              current = S6;
+                          }
+                          else if(c=='>'){
+                              current = S5;
+                          }
                     break;
                     case S13:
-                          // a compléter
+                          if(c=='>'){
+                              current = S5;
+                          }
+                          else if(isLetter(c) || isNumber(c)){
+                              current = S7;
+                          }
                     break;
             }
       }
