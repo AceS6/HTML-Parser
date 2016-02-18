@@ -8,15 +8,13 @@
 void run(FILE* f){
       Stack* stack =  getStack();
       State current;  // current state
-      push(stack, 'c');
-      push(stack, 'u');
-      push(stack, 'l');
       print(stack);
       char c;         // current analysed caracter
       current = S0;
       printf("STATE S0");
+      //char* balise="";
       while(((c = fgetc(f))!=EOF) && current != S5){
-            //printf("\ncaracter %s \n", &c);
+            printf("\n");
             switch(current){
                     case S0:
                           printf("STATE S0");
@@ -35,8 +33,9 @@ void run(FILE* f){
                               current = S3;
                           }
                           else if(isLetter(c) || isNumber(c)){
-
                               current = S2;
+                              //balise+=c;
+                              printf("\ncaracter=%c",c);
                           }
                           else{
                               //printf("balise ouvrante\n");
@@ -50,6 +49,10 @@ void run(FILE* f){
                           }
                           else if(c==' '){
                             current = S6;
+                          }
+                          else{
+                               //balise+=c;
+                               printf("\ncaracter=%c",c);
                           }
                     break;
                     case S3:
@@ -130,5 +133,6 @@ void run(FILE* f){
                     break;
             }
       }
+      //printf("balise=%s", balise);
       deleteStack(stack);
 }

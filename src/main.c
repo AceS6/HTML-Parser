@@ -11,7 +11,7 @@ int main(){
             printf("successfully opened file %s\n", path);
             run(f);
             closeFile(f);
-            printf("closing file %s\n", path);
+            printf("\nclosing file %s\n", path);
       }
       return 0;
 }
