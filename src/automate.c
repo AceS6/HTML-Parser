@@ -4,16 +4,19 @@
 #include "../include/stack.h"
 #include "../include/io.h"
 
-int i=0;
 
 void run(FILE* f){
-      Stack stack;
+      Stack* stack =  getStack();
       State current;  // current state
+      push(stack, 'c');
+      push(stack, 'u');
+      push(stack, 'l');
+      print(stack);
       char c;         // current analysed caracter
       current = S0;
       printf("STATE S0");
       while(((c = fgetc(f))!=EOF) && current != S5){
-            printf("\ncaracter %s \n", &c);
+            //printf("\ncaracter %s \n", &c);
             switch(current){
                     case S0:
                           printf("STATE S0");
@@ -127,4 +130,5 @@ void run(FILE* f){
                     break;
             }
       }
+      deleteStack(stack);
 }
