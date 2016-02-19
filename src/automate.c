@@ -13,7 +13,7 @@
 #include "../include/stack.h"
 #include "../include/io.h"
 
-bool debugState=false;
+bool debugState=true;
 bool debugCaracter=true;
 
 void run(FILE* f){
@@ -31,7 +31,7 @@ void run(FILE* f){
             }
             switch(current){
                     case S0:
-                          if(debugState){printf("STATE S0");}
+                          if(debugState){printf("\nSTATE S0 ");}
                           if(c=='<'){
                               printf(KMAG "\n_______________ balise\n");
                               current = S1;
@@ -41,7 +41,7 @@ void run(FILE* f){
                           }
                     break;
                     case S1:
-                          if(debugState){printf("STATE S1");}
+                          if(debugState){printf("\nSTATE S1 ");}
                           if(c=='/'){
                               current = S3;
                           }
@@ -54,7 +54,7 @@ void run(FILE* f){
                           }
                     break;
                     case S2:
-                          if(debugState){printf("STATE S2");}
+                          if(debugState){printf("\nSTATE S2 ");}
                           if(c=='>'){
                               //current = S5;
                               finishState(f);
@@ -67,13 +67,13 @@ void run(FILE* f){
                           }
                     break;
                     case S3:
-                          if(debugState){printf("STATE S3");}
+                          if(debugState){printf("\nSTATE S3 ");}
                           if(isLetter(c) || isNumber(c)){
                               current = S4;
                           }
                     break;
                     case S4:
-                          if(debugState){printf("STATE S4");}
+                          if(debugState){printf("\nSTATE S4 ");}
                           if(c=='>'){
                               //current = S5;
                               finishState(f);
@@ -86,25 +86,25 @@ void run(FILE* f){
                           }
                     break;
                     case S5:
-                          if(debugState){printf("STATE S5\n");}
+                          if(debugState){printf("\nSTATE S5 \n");}
                           printf("\nPress Any Key to Continue\n");
                           getchar();
                           run(f);
                     break;
                     case S6:
-                          if(debugState){printf("STATE S6");}
+                          if(debugState){printf("\nSTATE S6 ");}
                           if(isLetter(c) || isNumber(c)){
                                current = S7;
                           }
                     break;
                     case S7:
-                          if(debugState){printf("STATE S7");}
+                          if(debugState){printf("\nSTATE S7 ");}
                           if(c=='='){
                                current = S8;
                           }
                     break;
                     case S8:
-                          if(debugState){printf("STATE S8");}
+                          if(debugState){printf("\nSTATE S8 ");}
                           if(c=='\"'){
                                current = S10;
                           }
@@ -116,27 +116,27 @@ void run(FILE* f){
                           }
                     break;
                     case S9:
-                          if(debugState){printf("STATE S9");}
+                          if(debugState){printf("\nSTATE S9 ");}
                           if(c==' '){
                               current = S13;
                           }
                     break;
                     case S10:
-                          if(debugState){printf("STATE S10");}
+                          if(debugState){printf("\nSTATE S10 ");}
                           if(c=='\"'){
                                printf(KCYN "\n======= PARAM\n");
                                current = S12;
                           }
                     break;
                     case S11:
-                          if(debugState){printf("STATE S11");}
+                          if(debugState){printf("\nSTATE S11 ");}
                           if(c=='\''){
                                printf(KCYN "\n ======= PARAM\n");
                                current = S12;
                           }
                     break;
                     case S12:
-                          if(debugState){printf("STATE S12");}
+                          if(debugState){printf("\nSTATE S12 ");}
                           if(c==' '){
                               current = S6;
                           }
@@ -146,7 +146,7 @@ void run(FILE* f){
                           }
                     break;
                     case S13:
-                          if(debugState){printf("STATE S13");}
+                          if(debugState){printf("\nSTATE S13 ");}
                           if(c=='>'){
                               //current = S5;
                               finishState(f);
