@@ -43,7 +43,6 @@ void run(FILE* f){
                     case S1:
                           if(debugState){printf("STATE S1");}
                           if(c=='/'){
-                              printf("balise fermante\n");
                               current = S3;
                           }
                           else if(isLetter(c) || isNumber(c)){
@@ -62,7 +61,7 @@ void run(FILE* f){
                               printf("\nfin de balise\n");
                           }
                           else if(c==' '){
-                               printf(KMAG "\n_______________ balise\n");
+                               printf(KMAG "\n_______________ balise");
                                printf(KCYN"\n======= PARAM\n");
                                current = S6;
                           }
@@ -70,7 +69,6 @@ void run(FILE* f){
                     case S3:
                           if(debugState){printf("STATE S3");}
                           if(isLetter(c) || isNumber(c)){
-                              printf("\nclosing balise : caracter=%c",c);
                               current = S4;
                           }
                     break;
@@ -81,7 +79,7 @@ void run(FILE* f){
                               finishState(f);
                           }
                           else if(isLetter(c) || isNumber(c)){
-                                printf("\nclosing balise : caracter=%c",c);
+
                           }
                           else{
                                 //printf("error");
@@ -165,8 +163,8 @@ void run(FILE* f){
 
 void finishState(FILE* f){
       if(debugState){printf("STATE S5\n");}
+      printf(KYEL "\n_______________________________________________\n");
       printf("\nPress Any Key to Continue\n");
       getchar();
-      printf(KYEL "_______________________________________________\n");
       run(f);
 }
