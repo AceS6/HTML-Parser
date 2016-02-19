@@ -8,12 +8,12 @@
 void run(FILE* f){
       Stack* stack =  getStack();
       State current;  // current state
-      print(stack);
+      
       char c;         // current analysed caracter
       current = S0;
       printf("STATE S0");
       //char* balise="";
-      while(((c = fgetc(f))!=EOF) && current != S5){
+      while(((c = fgetc(f))!=EOF)){
             printf("\n");
             switch(current){
                     case S0:
@@ -58,6 +58,7 @@ void run(FILE* f){
                     case S3:
                           printf("STATE S3");
                           if(isLetter(c) || isNumber(c)){
+                              printf("\nclosing balise : caracter=%c",c);
                               current = S4;
                           }
                     break;
@@ -66,10 +67,14 @@ void run(FILE* f){
                           if(c=='>'){
                               current = S5;
                           }
+                          else{
+                                printf("\nclosing balise : caracter=%c",c);
+                          }
                     break;
                     case S5:
-                          printf("STATE S5");
+                          printf("STATE S5\n");
                           printf("automate finished");
+                          run(f);
                     break;
                     case S6:
                           printf("STATE S6");
