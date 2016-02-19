@@ -1,3 +1,12 @@
+#define KNRM  "\x1B[0m"
+#define KRED  "\x1B[31m"
+#define KGRN  "\x1B[32m"
+#define KYEL  "\x1B[33m"
+#define KBLU  "\x1B[34m"
+#define KMAG  "\x1B[35m"
+#define KCYN  "\x1B[36m"
+#define KWHT  "\x1B[37m"
+
 #include <stdio.h>
 
 #include "../include/automate.h"
@@ -5,6 +14,7 @@
 #include "../include/io.h"
 
 bool debugState=false;
+bool debugCaracter=true;
 
 void run(FILE* f){
       Stack* stack =  getStack();
@@ -12,15 +22,18 @@ void run(FILE* f){
 
       char c;         // current analysed caracter
       current = S0;
-      if(debugState){printf("STATE S0");}
       //char* balise="";
       while(((c = fgetc(f))!=EOF)){
-            if(debugState){printf("\n");}
+            //printf("\e[1;1H\e[2J");
+            //printf(KWHT "\n");
+            if(debugCaracter){
+                  printf(KWHT "%c", c);
+            }
             switch(current){
                     case S0:
                           if(debugState){printf("STATE S0");}
                           if(c=='<'){
-                              //printf("chevron ouvrant");
+                              printf(KMAG "\n_______________ balise\n");
                               current = S1;
                           }
                           else{
@@ -30,29 +43,28 @@ void run(FILE* f){
                     case S1:
                           if(debugState){printf("STATE S1");}
                           if(c=='/'){
-                              //printf("balise fermante\n");
+                              printf("balise fermante\n");
                               current = S3;
                           }
                           else if(isLetter(c) || isNumber(c)){
                               current = S2;
-                              //balise+=c;
-                              printf("\ncaracter=%c",c);
                           }
                           else{
+                                current = S2;
                               //printf("balise ouvrante\n");
                           }
                     break;
                     case S2:
-                          if(debugState){printf("STATE S2");}                          if(c=='>'){
-                              current = S5;
-                              printf("fin de balise\n");
+                          if(debugState){printf("STATE S2");}
+                          if(c=='>'){
+                              //current = S5;
+                              finishState(f);
+                              printf("\nfin de balise\n");
                           }
                           else if(c==' '){
-                            current = S6;
-                          }
-                          else{
-                               //balise+=c;
-                               printf("\ncaracter=%c",c);
+                               printf(KMAG "\n_______________ balise\n");
+                               printf(KCYN"\n======= PARAM\n");
+                               current = S6;
                           }
                     break;
                     case S3:
@@ -65,13 +77,14 @@ void run(FILE* f){
                     case S4:
                           if(debugState){printf("STATE S4");}
                           if(c=='>'){
-                              current = S5;
+                              //current = S5;
+                              finishState(f);
                           }
                           else if(isLetter(c) || isNumber(c)){
                                 printf("\nclosing balise : caracter=%c",c);
                           }
                           else{
-                                printf("error");
+                                //printf("error");
                           }
                     break;
                     case S5:
@@ -83,22 +96,22 @@ void run(FILE* f){
                     case S6:
                           if(debugState){printf("STATE S6");}
                           if(isLetter(c) || isNumber(c)){
-                              current = S7;
+                               current = S7;
                           }
                     break;
                     case S7:
                           if(debugState){printf("STATE S7");}
                           if(c=='='){
-                              current = S8;
+                               current = S8;
                           }
                     break;
                     case S8:
                           if(debugState){printf("STATE S8");}
                           if(c=='\"'){
-                              current = S10;
+                               current = S10;
                           }
                           else if(c=='\''){
-                              current = S11;
+                               current = S11;
                           }
                           else if(isLetter(c) || isNumber(c)){
                               current = S9;
@@ -113,13 +126,15 @@ void run(FILE* f){
                     case S10:
                           if(debugState){printf("STATE S10");}
                           if(c=='\"'){
-                              current = S12;
+                               printf(KCYN "\n======= PARAM\n");
+                               current = S12;
                           }
                     break;
                     case S11:
                           if(debugState){printf("STATE S11");}
                           if(c=='\''){
-                              current = S12;
+                               printf(KCYN "\n ======= PARAM\n");
+                               current = S12;
                           }
                     break;
                     case S12:
@@ -128,13 +143,15 @@ void run(FILE* f){
                               current = S6;
                           }
                           else if(c=='>'){
-                              current = S5;
+                              //current = S5;
+                              finishState(f);
                           }
                     break;
                     case S13:
                           if(debugState){printf("STATE S13");}
                           if(c=='>'){
-                              current = S5;
+                              //current = S5;
+                              finishState(f);
                           }
                           else if(isLetter(c) || isNumber(c)){
                               current = S7;
@@ -144,4 +161,12 @@ void run(FILE* f){
       }
       //printf("balise=%s", balise);
       deleteStack(stack);
+}
+
+void finishState(FILE* f){
+      if(debugState){printf("STATE S5\n");}
+      printf("\nPress Any Key to Continue\n");
+      getchar();
+      printf(KYEL "_______________________________________________\n");
+      run(f);
 }

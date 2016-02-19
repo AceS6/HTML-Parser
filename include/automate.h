@@ -18,6 +18,7 @@ typedef enum {
         S13
 } State;
 
-void run();
+void run(FILE* f);
+void finishState(FILE* f);
 
 #endif
