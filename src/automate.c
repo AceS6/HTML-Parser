@@ -7,11 +7,7 @@
 #define KCYN  "\x1B[36m"
 #define KWHT  "\x1B[37m"
 
-#include <stdio.h>
-
 #include "../include/automate.h"
-#include "../include/stack.h"
-#include "../include/io.h"
 
 bool debugState=false;
 bool debugCaracter=true;
@@ -42,6 +38,7 @@ void run(FILE* f){
                     break;
                     case S1:
                           if(debugState){printf("\nSTATE S1 ");}
+                          appendToLastTag(stack, c);
                           if(c=='/'){
                               current = S3;
                           }
@@ -57,7 +54,7 @@ void run(FILE* f){
                           if(debugState){printf("\nSTATE S2 ");}
                           if(c=='>'){
                               //current = S5;
-                              finishState(f);
+                              finishState(f, stack);
                               printf("\nfin de balise\n");
                           }
                           else if(c==' '){
@@ -76,7 +73,7 @@ void run(FILE* f){
                           if(debugState){printf("\nSTATE S4 ");}
                           if(c=='>'){
                               //current = S5;
-                              finishState(f);
+                              finishState(f, stack);
                           }
                           else if(isLetter(c) || isNumber(c)){
 
@@ -97,7 +94,7 @@ void run(FILE* f){
                                current = S7;
                           }
                           else{
-                                finishState(f);
+                                finishState(f, stack);
                                 printf("YOLOOOOO");
                           }
                     break;
@@ -146,14 +143,14 @@ void run(FILE* f){
                           }
                           else if(c=='>'){
                               //current = S5;
-                              finishState(f);
+                              finishState(f, stack);
                           }
                     break;
                     case S13:
                           if(debugState){printf("\nSTATE S13 ");}
                           if(c=='>'){
                               //current = S5;
-                              finishState(f);
+                              finishState(f, stack);
                           }
                           else if(isLetter(c) || isNumber(c)){
                               current = S7;
@@ -162,10 +159,18 @@ void run(FILE* f){
             }
       }
       //printf("balise=%s", balise);
+      freeMemory(stack);
+}
+
+void freeMemory(Stack* stack){
+      for(int i=0;i<(*stack).top;i++){
+            free((*stack).stk[i]);
+      }
       deleteStack(stack);
 }
 
-void finishState(FILE* f){
+void finishState(FILE* f, Stack* stack){
+      push(stack, getTag());
       if(debugState){printf("STATE S5\n");}
       printf(KYEL "\n_______________________________________________\n");
       printf("\nPress Any Key to Continue\n");

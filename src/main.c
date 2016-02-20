@@ -1,5 +1,4 @@
 #include "../include/main.h"
-#include "../include/io.h"
 #include "../include/automate.h"
 
 int main(){

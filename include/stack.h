@@ -3,41 +3,28 @@
 
 #define MAXSIZE 100
 
-#include <stdlib.h>
+#include <stdio.h>
+#include "../include/tag.h"
 
 struct stack{
       unsigned int top;
-      char stk[MAXSIZE];
+      Tag* stk[MAXSIZE];
 };
 
 typedef struct stack Stack;
 
-Stack* getStack(){
-      Stack* stack;
-      stack = malloc(sizeof(Stack));
-      (*stack).top=0;
-      return stack;
-}
+Stack* getStack();
 
-void deleteStack(Stack* stack){
-      free(stack);
-}
+Tag* top(Stack* stack);
 
-void push(Stack* stack, char car){
-      (*stack).stk[(*stack).top] = car;
-      printf("top=%d\n", (*stack).top);
-      (*stack).top++;
-}
-char pop(Stack* stack){
-       char ret = (*stack).stk[(*stack).top];
-       (*stack).top--;
-}
-void print(Stack* stack){
-       printf("printing stack\n");
-       for(int i=0;i<(*stack).top;i++){
-             printf("[%c]", (*stack).stk[i]);
-       }
-       printf("\n");
-}
+void appendToLastTag(Stack* stack, char car);
+
+void deleteStack(Stack* stack);
+
+void push(Stack* stack, Tag* car);
+
+Tag* pop(Stack* stack);
+
+void print(Stack* stack);
 
 #endif
