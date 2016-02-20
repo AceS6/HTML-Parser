@@ -62,6 +62,9 @@ void run(FILE* f){
                                printf(KCYN"\n======= PARAM\n");
                                current = S6;
                           }
+                          else{
+                                appendToLastTag(stack, c);
+                          }
                     break;
                     case S3:
                           if(debugState){printf("\nSTATE S3 ");}
@@ -170,6 +173,7 @@ void freeMemory(Stack* stack){
 }
 
 void finishState(FILE* f, Stack* stack){
+      print(stack);
       push(stack, getTag());
       if(debugState){printf("STATE S5\n");}
       printf(KYEL "\n_______________________________________________\n");
