@@ -13,7 +13,7 @@
 #include "../include/stack.h"
 #include "../include/io.h"
 
-bool debugState=true;
+bool debugState=false;
 bool debugCaracter=true;
 
 void run(FILE* f){
@@ -95,6 +95,10 @@ void run(FILE* f){
                           if(debugState){printf("\nSTATE S6 ");}
                           if(isLetter(c) || isNumber(c)){
                                current = S7;
+                          }
+                          else{
+                                finishState(f);
+                                printf("YOLOOOOO");
                           }
                     break;
                     case S7:
