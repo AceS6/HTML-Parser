@@ -1,6 +1,9 @@
 #ifndef AUTOMATE_H
 #define AUTOMATE_H
 
+#include <stdio.h>
+#include "../include/stack.h"
+#include "../include/io.h"
 typedef enum {
         S0, // starting state
         S1,
@@ -18,6 +21,8 @@ typedef enum {
         S13
 } State;
 
-void run();
+void run(FILE* f);
+void finishState(FILE* f, Stack* stack);
+void freeMemory(Stack* stack);
 
 #endif
